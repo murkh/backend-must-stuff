@@ -1,0 +1,111 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# venvs / package managers
+.venv/
+venv/
+env/
+.uv/
+# uv.lock IS committed (GYCOP-122): CI `uv sync --frozen` needs it for a deterministic
+# toolchain (ruff/mypy pinned). Do not re-ignore — a missing lock makes CI re-resolve
+# to newer tool versions and breaks `ruff format --check`.
+
+# pytest / coverage / type checking
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+.import_linter_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.iml
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.yaml
+
+# Generated artefacts
+*.log
+logs/
+tmp/
+.cache/
+
+# Local data / one-shot ingest outputs
+data/local/
+scripts/oneshot/*/output/
+scripts/oneshot/*/outputs/
+scripts/oneshot/*/quality/
+scripts/oneshot/*/staging/
+
+# Eval --explain reports (eval/runner.py --explain JSONL+md; eval/diag_linker.py)
+eval/reports/
+
+# Frontend build (apps/web — Next.js, per ADR-0022)
+# apps/web/.gitignore covers node_modules, .next/, out/, .env*, *.tsbuildinfo and
+# next-env.d.ts relative to itself; these are the root-level duplicates that matter
+# for tooling which reads only this file.
+apps/web/node_modules/
+apps/web/.next/
+apps/web/out/
+apps/web/coverage/
+# Override the Python `lib/` rule (line 13) for the frontend's application code.
+# `lib/` in the Next app is React/TS utilities — `lib/utils.ts` (the `cn()` helper every
+# component imports), `lib/backend.ts` (the BFF fetch layer), `lib/export-chat-pdf.ts`,
+# `lib/relative-time.ts` — plus feature-local ones like `features/auth/lib/jwt.ts`.
+# None are Python build artefacts. The glob must cover nested `lib/` dirs, not just a
+# top-level one: with `apps/web/src/lib/` (the pre-ADR-0022 Vite path) these five files
+# were silently untracked.
+!apps/web/**/lib/
+!apps/web/**/lib/**
+
+# Helm / Terraform
+infra/helm/charts/*.tgz
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
+infra/terraform/.terraform.lock.hcl
+
+# Personal / local notes
+local-dev-docs/
+
+# RAG eval run outputs (regenerated per run)
+eval/rag/results/
